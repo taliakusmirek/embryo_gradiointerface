@@ -132,39 +132,39 @@ def generate_report(image, lining_thickness):
     )
 
 # Gradio interface with custom dark theme
-with gr.Blocks(theme=gr.themes.Monochrome(
-    primary_hue=gr.themes.Color(
-        c50="#EAEBFF",
-        c100="#DADCFF", 
-        c200="#BCBEFF", 
-        c300="#9E9EFF", 
-        c400="#8080FF", 
-        c500="#6366F1", 
-        c600="#4F46E5", 
-        c700="#4338CA", 
-        c800="#3730A3", 
-        c900="#312E81", 
-        c950="#1E1B4B",
+with gr.Blocks(
+    theme=gr.themes.Monochrome(
+        primary_hue=gr.themes.Color(
+            c50="#EAEBFF",
+            c100="#DADCFF", 
+            c200="#BCBEFF", 
+            c300="#9E9EFF", 
+            c400="#8080FF", 
+            c500="#6366F1", 
+            c600="#4F46E5", 
+            c700="#4338CA", 
+            c800="#3730A3", 
+            c900="#312E81", 
+            c950="#1E1B4B",
+        ),
+        neutral_hue=gr.themes.Color(
+            c50="#F6F7F9",
+            c100="#EBEDF0",
+            c200="#D8DCE3",
+            c300="#B9C1CC",
+            c400="#8896AB",
+            c500="#5D6B7E",
+            c600="#3E4756",
+            c700="#2A303D",
+            c800="#171C27",
+            c900="#0B0E16",
+            c950="#060810",
+        ),
+        spacing_size=gr.themes.sizes.spacing_md,
+        radius_size=gr.themes.sizes.radius_md,
+        text_size=gr.themes.sizes.text_md,
     ),
-    neutral_hue=gr.themes.Color(
-        c50="#F6F7F9",
-        c100="#EBEDF0",
-        c200="#D8DCE3",
-        c300="#B9C1CC",
-        c400="#8896AB",
-        c500="#5D6B7E",
-        c600="#3E4756",
-        c700="#2A303D",
-        c800="#171C27",
-        c900="#0B0E16",
-        c950="#060810",
-    ),
-    spacing_size=gr.themes.sizes.spacing_md,
-    radius_size=gr.themes.sizes.radius_md,
-    text_size=gr.themes.sizes.text_md,
-)) as interface:
-    # Custom CSS for complete dark mode styling
-    interface.load(css="""
+    css="""
     /* Dark Mode Variables */
     :root {
         --body-background: #0a0a12;
@@ -211,232 +211,14 @@ with gr.Blocks(theme=gr.themes.Monochrome(
         color: var(--text-primary) !important;
         border-color: var(--border-color) !important;
     }
-    
-    /* Header styling */
-    .main-header {
-        color: var(--text-primary);
-        font-size: 32px;
-        font-weight: bold;
-        text-align: center;
-        margin: 20px 0;
-        padding: 15px;
-        background: linear-gradient(90deg, #6366F1, #4338CA);
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        letter-spacing: 1px;
-    }
-    
-    /* Simplified image upload area styling */
-    .image-upload-area {
-        border: 1px solid var(--border-color);
-        border-radius: 10px;
-        padding: 10px;
-        background-color: var(--card-background);
-        transition: all 0.3s ease;
-        overflow: hidden;
-    }
-    
-    .image-upload-area:hover {
-        border-color: var(--accent-blue);
-    }
-    
-    /* Upload button styling */
-    .image-upload-area .upload-btn,
-    .image-upload-area button {
-        background-color: var(--card-background-secondary) !important;
-        color: var(--text-primary) !important;
-        border: 1px solid var(--border-color) !important;
-        border-radius: 6px !important;
-        padding: 8px 15px !important;
-        transition: all 0.2s ease;
-        margin: 5px !important;
-    }
-    
-    .image-upload-area .upload-btn:not(:last-child),
-    .image-upload-area button:not(:last-child) {
-        margin-right: 10px !important;
-    }
-    
-    .image-upload-area .upload-btn:hover,
-    .image-upload-area button:hover {
-        background-color: var(--accent-blue) !important;
-        color: white !important;
-    }
-    
-    .image-upload-area > div > div {
-        display: flex !important;
-        justify-content: center !important;
-        gap: 15px !important;
-        padding: 5px 0 !important;
-    }
-    
-    .image-upload-area > div {
-        margin: 10px 0 !important;
-    }
-    
-    /* Analysis section styling */
-    .analysis-section {
-        background-color: var(--card-background);
-        border-radius: 10px;
-        padding: 20px;
-        margin-top: 20px;
-        box-shadow: 0 4px 8px var(--shadow-light);
-        transition: all 0.3s ease;
-        border: 1px solid var(--card-border);
-    }
-    
-    /* Input and button styling */
-    .input-box {
-        background-color: var(--card-background-secondary) !important;
-        border: 1px solid var(--border-color) !important;
-        color: var(--text-primary) !important;
-        border-radius: 8px !important;
-        padding: 14px !important;
-        font-size: 16px !important;
-        transition: all 0.3s ease !important;
-        width: 100% !important;
-    }
-    
-    .input-box:focus, .input-box:hover {
-        border-color: var(--accent-blue) !important;
-        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2) !important;
-    }
-    
-    .analyze-button {
-        background-color: var(--accent-blue) !important;
-        color: white !important;
-        font-weight: bold !important;
-        padding: 14px 20px !important;
-        border-radius: 8px !important;
-        width: 75% !important;
-        max-width: 400px !important;
-        font-size: 16px !important;
-        margin: 20px auto 0 !important;
-        display: block !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
-        border: none !important;
-    }
-    
-    .analyze-button:hover {
-        background-color: var(--accent-blue-hover) !important;
-        box-shadow: 0 6px 14px rgba(0,0,0,0.25) !important;
-        transform: translateY(-2px);
-    }
-    
-    /* Result container styling */
-    .result-container {
-        margin-top: 20px;
-        transition: all 0.3s ease;
-        opacity: 1;
-        background-color: var(--card-background);
-        border-radius: 10px;
-        overflow: hidden;
-        border: 1px solid var(--card-border);
-    }
-    
-    /* Footer styling */
-    .footer-disclaimer {
-        text-align: center;
-        color: var(--text-muted);
-        font-size: 14px;
-        margin: 40px auto 20px;
-        padding: 10px;
-        max-width: 800px;
-        border-top: 1px solid var(--border-color);
-        padding-top: 20px;
-    }
-    
-    /* Fix for dark mode upload interface */
-    .dark .uploadButton, .dark .selected-file {
-        background-color: var(--card-background-secondary) !important;
-        color: var(--text-primary) !important;
-        border-color: var(--border-color) !important;
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .gradio-row > .gradio-column {
-            min-width: 100% !important;
-        }
-        
-        .main-header {
-            font-size: 26px;
-            padding: 10px;
-        }
-        
-        .input-box, .analyze-button {
-            font-size: 14px !important;
-            padding: 12px !important;
-        }
-        
-        .analysis-section {
-            padding: 18px;
-        }
-        
-        .footer-disclaimer {
-            font-size: 12px;
-            margin: 20px auto 10px;
-        }
-    }
-    
-    /* Animations and transitions */
-    .fade-in {
-        animation: fadeIn 0.6s ease;
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* Fix for any popups or menus */
-    .gr-form, .gr-panel, .gr-button, .gr-input {
-        background-color: var(--card-background) !important;
-        color: var(--text-primary) !important;
-        border-color: var(--border-color) !important;
-    }
-    
-    /* Override image upload component styles */
-    .file-preview, .file-preview img, .file-preview video {
-        background-color: var(--card-background) !important;
-        color: var(--text-primary) !important;
-    }
-    
-    /* Dark mode for tabbed interfaces */
-    .tabs {
-        background-color: var(--card-background) !important;
-    }
-    
-    .tab-nav {
-        background-color: var(--card-background-secondary) !important;
-        color: var(--text-primary) !important;
-    }
-    
-    .tab-nav.selected {
-        background-color: var(--accent-blue) !important;
-        color: white !important;
-    }
-
-    /* Button and input container */
-    .input-area {
-        margin-top: 10px;
-    }
-
-    .button-container {
-        padding: 10px 0;
-        text-align: center;
-    }
-    """)
-    
+    """
+) as interface:
     gr.HTML('<div class="main-header fade-in">EmbryoML</div>')
     
     with gr.Row(elem_classes=["main-content"]):
         with gr.Column(scale=1, min_width=320):
             # Left Panel - Image and Input (simplified)
-            with gr.Box(elem_classes=["image-upload-area", "fade-in"]):
+            with gr.Group(elem_classes=["image-upload-area", "fade-in"]):
                 gr.Markdown('<div style="color: var(--text-primary); font-size: 16px; margin-bottom: 10px; text-align: center;">Upload Embryo Image</div>')
                 image_display = gr.Image(
                     type="pil",
@@ -446,7 +228,7 @@ with gr.Blocks(theme=gr.themes.Monochrome(
                     elem_id="embryo-image-upload"
                 )
             
-            with gr.Box(elem_classes=["analysis-section", "fade-in"]):
+            with gr.Group(elem_classes=["analysis-section", "fade-in"]):
                 gr.HTML('<div style="color: var(--text-primary); font-size: 18px; margin-bottom: 15px; font-weight: bold;">Uterine Lining Thickness (mm)</div>')
                 
                 # Wrap input in a div for better styling
